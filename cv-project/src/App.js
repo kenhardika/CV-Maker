@@ -4,16 +4,21 @@ import FormSide from './FormSide';
 import ViewSide from './ViewSide';
 
 function App() {
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [address, setAddress] = useState('');
-
+  const initialForm = {
+    firstName: '',
+    lastName: '',
+    address: ''
+  }
+  const [data, setData] = useState(initialForm);
   function dataFromForm(dataForm){
-    console.log(dataForm)
-    setFirstName(dataForm.firstName);
-    setLastName(dataForm.lastName);
-    setAddress(dataForm.address);
+    setData(prevData => {
+      return {
+        ...prevData,
+        firstName: dataForm.firstName,
+        lastName: dataForm.lastName,
+        address: dataForm.address,
+      }
+    });
   }
 
   return (
@@ -21,7 +26,7 @@ function App() {
       <header>Automatic CV Maker</header>
       <main>
         <FormSide dataFormSide = {dataFromForm}/>
-        <ViewSide firstName = {firstName} lastName = {lastName} address = {address} />
+        <ViewSide firstName = {data.firstName} lastName = {data.lastName} address = {data.address} />
       </main>
       <footer> github <a href="https://github.com/kenhardika" target="_blank" rel="noopener noreferrer"> @kenhardika </a> </footer>
     </div>
