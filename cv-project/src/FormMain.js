@@ -7,23 +7,26 @@ function FormMain({ dataMain }) {
     address: "",
   });
   // console.log('start');
+  function pushDataForm(){
+    dataMain(dataForm);
+  }
+  
   useEffect(()=>{
-    console.log(dataForm.firstName);
+    pushDataForm();
     return ()=>{
     }
   },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   [dataForm]
   );
 
   function inputDataForm(e, inputName){
-    e.preventDefault();
     setDataForm((prevData) => {
       return {
         ...prevData,
         [inputName]: e.target.value,
       };
     });
-    dataMain(dataForm);
   }
 
   return (
@@ -33,7 +36,10 @@ function FormMain({ dataMain }) {
               type="text"
               placeholder="First Name"
               required
-              onChange={(e)=> inputDataForm(e,'firstName')}
+              onChange={(e)=> { 
+                inputDataForm(e, 'firstName'); 
+               }
+              }
               
             />
           </div>
@@ -42,16 +48,9 @@ function FormMain({ dataMain }) {
               type="text"
               placeholder="Last Name"
               required
-              // onChange={(e) => {
-              //   e.preventDefault();
-              //   setDataForm((prevData) => {
-              //     return {
-              //       ...prevData,
-              //       lastName: e.target.value,
-              //     };
-              //   });
-              //   dataMain(dataForm);
-              // }}
+              onChange={(e)=>{
+                inputDataForm(e, 'lastName');
+              }}
             />
           </div>
           <div className="form-layout">
@@ -59,16 +58,9 @@ function FormMain({ dataMain }) {
               type="text"
               placeholder="Address"
               required
-              // onChange={(e) => {
-              //   e.preventDefault();
-              //   setDataForm((prevData) => {
-              //     return {
-              //       ...prevData,
-              //       address: e.target.value,
-              //     };
-              //   });
-              //   dataMain(dataForm);
-              // }}
+              onChange={(e)=>{
+                inputDataForm(e, 'address');
+              }}
             />
           </div>
         </div>

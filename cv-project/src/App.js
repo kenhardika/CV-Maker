@@ -1,14 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import FormMain from './FormMain';
 import ViewSide from './ViewSide';
 
 function App() {
-  const [data, setData] = useState({
-    firstName: '',
-    lastName: '',
-    address: ''
-  });
+  const [data, setData] = useState({});
   function dataForm(dataForm){
     setData(prevData => {
       return {
@@ -18,13 +14,8 @@ function App() {
         address: dataForm.address,
       }
     });
+    // console.log(dataForm);
   }
-  useEffect(()=>{
-    console.log(data.firstName + 'from app');
-    return ()=>{
-    }
-  }, [data]);
-
   return (
     <div className="App">
       <header>Automatic CV Maker</header>
